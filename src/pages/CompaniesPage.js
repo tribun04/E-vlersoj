@@ -5,6 +5,7 @@ import { useCompanies } from '../hooks/useCompanies';
 import CompanyFilterBar from '../components/CompanyFilterBar'; // This import is correct
 import CompanyCard from '../components/CompanyCard';
 import axiosInstance from '../api/axiosInstance';
+import { Helmet } from 'react-helmet'; 
 
 
 
@@ -51,6 +52,9 @@ const CompaniesPage = () => {
 
     return (
         <div className="bg-white dark:bg-gray-900 min-h-screen py-[5rem] ">
+            <Helmet>
+        <title>E-Vleresoj | Companies</title>
+            </Helmet>
             <div className="max-w-[1250px] mx-auto px-4">
                 <div className="text-center mb-12">
                     <Title level={2} className="text-4xl font-bold mb-4 text-gray-800 dark:text-white">

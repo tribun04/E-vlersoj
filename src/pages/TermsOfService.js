@@ -36,8 +36,8 @@ const TermsOfService = () => (
           Nëse nuk pajtoheni me (ose nuk mund të respektoni) Marrëveshjet,
           atëherë nuk mund ta përdorni Shërbimin, por ju lutemi na njoftoni duke
           na dërguar email në{" "}
-          <a href="mailto:info@e-vlersoj.com" className="text-blue-600">
-            info@e-vlersoj.com
+          <a href="mailto:Support@e-vlersoj.com" className="text-blue-600">
+            Support@e-vlersoj.com
           </a>{" "}
           në mënyrë që të përpiqemi të gjejmë një zgjidhje. Këto Kushte zbatohen
           për të gjithë vizitorët, përdoruesit dhe të tjerët që dëshirojnë të
@@ -340,8 +340,8 @@ const TermsOfService = () => (
         <ul className="list-none space-y-1">
           <li>
             <strong>Me email:</strong>{" "}
-            <a href="mailto:info@e-vlersoj.com" className="text-blue-600">
-              info@e-vlersoj.com
+            <a href="mailto:Support@e-vlersoj.com" className="text-blue-600">
+              Support@e-vlersoj.com
             </a>
           </li>
           <li>

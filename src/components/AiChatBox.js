@@ -146,15 +146,14 @@ const VoidChatBot = () => {
     const WelcomeScreen = () => (
         <div className="text-center py-12 px-4 flex flex-col items-center h-full justify-center">
             {/* FIX: Cleaned up styling for this Avatar */}
-            <Avatar
+            <img 
                 src={theme.botAvatarUrl}
-                size={80}
-                className="mx-auto mb-5 bg-gray-800 p-2 shadow-lg border-2 object-contain"
+                className="mx-auto mb-5  p-2   object-container  flex items-center justify-center" width={100} alt="Void AI Avatar"
             />
             <Text className="text-2xl text-white font-medium" style={{ color: theme.primary }}>
                 Void AI Assistant
             </Text>
-            <Text type="secondary" className="block mt-2 text-gray-400 max-w-sm">
+            <Text  className="block mt-2 text-gray-400 max-w-sm">
                 I am a Cosmic Knowledge Engine. Ask me anything about technology, science, or the universe.
             </Text>
         </div>
@@ -165,7 +164,7 @@ const VoidChatBot = () => {
             <Button
                 type="primary" classNames="flex items-center"
                 onClick={() => setIsModalOpen(true)}
-                icon={<img src={theme.botAvatarUrl} width="50px" className="bg-transparent ant-btn-icon-only:m-0" />}
+                icon={<img src={theme.botAvatarUrl} className="mx-auto mb-5 p-2   object-container  flex items-center justify-center" width={100} alt="Void AI Avatar" />}
                 size="large"
                 className="font-semibold"
                 style={{
@@ -179,10 +178,9 @@ const VoidChatBot = () => {
 
             <Modal
                 title={
-                    <div className="flex items-center gap-3">
-                        <Avatar src={theme.botAvatarUrl} className="bg-gray-800" />
+                    <div className="flex  items-center p-2 gap-1 ">
+                        <img src={theme.botAvatarUrl} className="  w-[100px] object-container " alt="Void AI Avatar" /> 
                         <div>
-                            <span className="font-semibold text-lg" style={{ color: theme.primary }}>Void AI</span>
                             <div className="text-xs text-gray-400 flex items-center gap-1.5">
                                 <span className={`w-2 h-2 rounded-full ${loading ? 'bg-yellow-400 animate-pulse' : 'bg-green-400'}`}></span>
                                 {loading ? 'Typingg...' : 'Online'}
@@ -247,7 +245,7 @@ const VoidChatBot = () => {
                                 placeholder="Send a message into the void..."
                                 disabled={loading}
                                 autoSize={{ minRows: 1, maxRows: 4 }}
-                                className="bg-gray-700 text-gray-200 border-gray-600 focus:ring-0 rounded-lg placeholder-gray-500"
+                                className="bg-gray-700 text-black border-gray-600 focus:ring-0 rounded-lg placeholder-gray-500"
                                 style={{ resize: 'none', borderColor: 'transparent', '--tw-ring-color': theme.primary }}
                             />
                             <Button
@@ -256,12 +254,19 @@ const VoidChatBot = () => {
                                 onClick={handleSendMessage}
                                 loading={loading}
                                 disabled={!input.trim()}
-                                className="rounded-lg w-12 h-12 p-0 flex-shrink-0 flex items-center justify-center"
+                                className="w-[40px]   flex items-center justify-center"
                                 icon={<FiSend size={18} />}
                                 style={{
                                     backgroundColor: theme.primary,
                                     borderColor: theme.primary,
                                     boxShadow: `0 4px 14px rgba(0, 182, 122, 0.3)`,
+                                    width: '40px',
+                                    height: '40px',
+                                    borderRadius: '20px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: '#fff',
                                 }}
                             />
                         </div>

@@ -81,6 +81,7 @@ const Footer = () => {
                 { href: "/HelpCenter", label: "Qendra e Ndihmës" },
                 { href: "/blog", label: "Të Rejat" },
                 { href: "/contact", label: "Kontakti" },
+                { href: "/how-reviews-work", label: "Si Funksionojnë Vlerësimet" },
               ].map((link) => (
                 <li key={link.href}>
                   <a

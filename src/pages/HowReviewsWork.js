@@ -1,260 +1,296 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from 'react-helmet';
+
 import {
-    ShieldCheckIcon,
-    PencilSquareIcon,
-    PaperAirplaneIcon,
-    ChatBubbleBottomCenterTextIcon,
-    CheckCircleIcon,
-    XCircleIcon,
-} from '@heroicons/react/24/outline';
+    faStar as solidStar,
+    faStarHalfAlt as halfStar,
+    faStar as regularStar,
+    faChevronDown,
+    faCheckCircle,
+    faQuoteLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import Banner from "../components/Banner";
 
-// A reusable component for the animated number counters
-const AnimatedStat = ({ number, suffix, text }) => {
-    const [count, setCount] = useState(0);
-    const ref = useRef(null);
-    const isInteger = Number.isInteger(number);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
-                    let start = 0;
-                    const end = number;
-                    if (start === end) { setCount(end); return; }
-
-                    const duration = 2000;
-                    const startTime = Date.now();
-
-                    const step = () => {
-                        const now = Date.now();
-                        const progress = Math.min((now - startTime) / duration, 1);
-                        const currentCount = progress * (end - start) + start;
-
-                        setCount(isInteger ? Math.floor(currentCount) : parseFloat(currentCount.toFixed(1)));
-
-                        if (progress < 1) {
-                            requestAnimationFrame(step);
-                        } else {
-                            setCount(end);
-                        }
-                    };
-                    requestAnimationFrame(step);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.5 }
-        );
-
-        const currentRef = ref.current;
-        if (currentRef) {
-            observer.observe(currentRef);
-        }
-
-        return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
-            }
-        };
-    }, [number, isInteger]);
-
+function Banner1() {
     return (
-        <div ref={ref} className="text-center">
-            <p className="text-5xl font-bold text-primary-600">
-                {count}{suffix}
+          
+        
+        <div className="bg-gradient-to-r from-[#00B67A]/10 via-[#00B67A]/20 to-[#00B67A]/30 p-4 rounded-xl mb-8 border border-[#00B67A]/20 mt-10 ">
+            <p className="text-center text-sm font-medium text-gray-700 dark:text-gray-300">
+                ✨ E besuar nga <span className="font-bold text-[#00B67A] dark:text-[#00B67A]/80">2,450+</span> klientë dhe kompani ✨
             </p>
-            <p className="mt-2 text-sm font-medium text-slate-500 uppercase tracking-wider">{text}</p>
         </div>
     );
-};
+}
 
-// Main Page Component
-const HowReviewsWorkPage = () => {
-    const processSteps = [
+export default function PremiumReviewSection() {
+    const [expandedReview, setExpandedReview] = useState(null);
+    const [activeFilter, setActiveFilter] = useState("all");
+
+    const reviews = [
+        // (You can translate review contents here as well if you want)
         {
-            step: 1,
-            icon: PencilSquareIcon,
-            title: "Submit Your Review",
-            description: "Share your experience through our intuitive platform. Whether you received an email invitation or found us directly, submitting a review takes just minutes with our streamlined process.",
-            proTip: "Include specific details, photos, and context to make your review more valuable to others. The most helpful reviews mention particular features or experiences.",
-            imageUrl: "https://i.imgur.com/k6k9g5G.png" // Placeholder for a clean UI mockup
+            id: 1,
+            name: "Alex Johnson",
+            rating: 5,
+            date: "2023-05-15",
+            title: "Shërbim dhe kujdes i jashtëzakonshëm",
+            content: "Ekipi bëri gjithçka për të bërë që qeni ynë të ndihej rehat. Përditësimet ditore me foto na dhanë qetësi gjatë udhëtimit. Ambientet janë të pastra dhe të dizajnuara për rehati. Golden Retriever-i ynë entuziazmohet çdo herë kur arrijmë!",
+            verified: true,
+            experience: "positive",
+            tags: ["shërbim", "kompani"],
         },
         {
-            step: 2,
-            icon: ShieldCheckIcon,
-            title: "Quality Review",
-            description: "Our expert moderation team carefully reviews each submission using advanced AI and human oversight to ensure authenticity and compliance with our community standards.",
-            proTip: "Most reviews are processed within 24 hours. Our AI pre-screening handles 90% of submissions almost instantly, ensuring a swift and fair process.",
-            imageUrl: "https://i.imgur.com/gKEd1vj.png" // Placeholder for a clean UI mockup
+            id: 2,
+            name: "Maria Garcia",
+            rating: 4.5,
+            date: "2023-04-22",
+            title: "Eksperiencë shumë e mirë me produktin",
+            content: "Produkti që bleva tejkaloi pritshmëritë. Cilësia dhe dizajni ishin perfekte. Çmimi është pak më i lartë, por ia vlen.",
+            verified: true,
+            experience: "positive",
+            tags: ["produkt", "cilësi"],
         },
-        {
-            step: 3,
-            icon: PaperAirplaneIcon,
-            title: "Go Live",
-            description: "Your approved review is published and becomes visible to millions of users. It contributes to the business's overall rating and helps others make informed decisions.",
-            proTip: "Your review helps thousands of people make better choices every day! Top-rated reviews that are detailed and helpful get featured prominently.",
-            imageUrl: "https://i.imgur.com/XqT7hWd.png" // Placeholder for a clean UI mockup
-        },
-        {
-            step: 4,
-            icon: ChatBubbleBottomCenterTextIcon,
-            title: "Business Engagement",
-            description: "Businesses can respond to your review, creating valuable dialogue. This transparency helps build trust and shows how companies handle feedback and customer service.",
-            proTip: "Get notified instantly when businesses respond to your reviews! You can continue the conversation and even update your review if the situation is resolved.",
-            imageUrl: "https://i.imgur.com/X4uV74U.png" // Placeholder for a clean UI mockup
-        }
+        // Add more translated reviews as needed...
     ];
 
+    const filteredReviews = activeFilter === "all"
+        ? reviews
+        : reviews.filter(review => review.tags.includes(activeFilter));
+
+    const renderStars = (rating) => {
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+
+        return (
+
+<div className="flex items-center">
+<Helmet>
+        <title>E-Vleresoj - Home</title>
+      </Helmet>
+                {Array(5).fill(0).map((_, i) => {
+                    if (i < fullStars) {
+                        return <FontAwesomeIcon key={i} icon={solidStar} className="text-yellow-400 mr-0.5" />;
+                    } else if (i === fullStars && hasHalfStar) {
+                        return <FontAwesomeIcon key={i} icon={halfStar} className="text-yellow-400 mr-0.5" />;
+                    } else {
+                        return <FontAwesomeIcon key={i} icon={regularStar} className="text-gray-300 dark:text-gray-600 mr-0.5" />;
+                    }
+                })}
+                <span className="ml-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    {rating.toFixed(1)}
+                </span>
+            </div>
+        );
+    };
+
     return (
-        <div className="bg-slate-50 font-sans antialiased text-slate-800">
-            {/* Hero Section */}
-            <header className="bg-white">
-                <div className="max-w-7xl mx-auto px-6 py-24 sm:py-32 text-center">
-                    <div className="inline-flex items-center gap-x-2 bg-primary-50 text-primary-700 rounded-full px-4 py-1.5 text-sm font-semibold mb-6">
-                        <ShieldCheckIcon className="h-5 w-5" />
-                        <span>Our Commitment to Authenticity</span>
+        
+        <section className="w-full py-16 bg-white dark:bg-gray-900">
+            <Banner />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Banner1 />
+
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-8">
+                    <div className="max-w-3xl">
+                        <span className="inline-block mb-3 px-3 py-1 text-sm font-medium rounded-full bg-[#00B67A]/10 text-[#00B67A] dark:bg-[#00B67A]/20 dark:text-[#00B67A]/80">
+                            Vlerësimet e klientëve dhe kompanive
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+                            Vleresime te verteta nga
+                            <span className="text-[#00B67A] dark:text-[#00B67A]/80"> klientët per bizneset </span> qe kane pasur experience
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            Mos I besoni marketingut te bizneseve, besoju njerezve qe kane experience me kualitetin, shpejtesine dhe cmimet e ketyre bizneseve.
+                        </p>
                     </div>
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900">
-                        How Our Reviews Work
-                    </h1>
-                    <p className="mt-6 text-lg lg:text-xl max-w-3xl mx-auto leading-8 text-slate-600">
-                        We believe in a transparent review process that empowers consumers and holds businesses accountable. Here’s a clear look at how we ensure every review is genuine and helpful.
-                    </p>
-                    <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <a href="#process" className="rounded-md bg-primary-600 px-5 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors">
-                            See the Process
+
+                    <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                        <a href="/CompaniesPage" className="px-5 py-2.5 bg-[#00B67A] hover:bg-[#009A6B] text-white font-medium rounded-lg shadow transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            Shto vlerësim
                         </a>
-                        <a href="#guidelines" className="text-base font-semibold leading-6 text-slate-900 hover:text-slate-700">
-                            Read Guidelines <span aria-hidden="true">→</span>
-                        </a>
+
                     </div>
                 </div>
-            </header>
 
-            {/* Stats Section */}
-            <section className="bg-white border-t border-b border-slate-200 py-24 sm:py-32">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">
-                        <AnimatedStat number={10} suffix="M+" text="Reviews Published" />
-                        <AnimatedStat number={24} suffix="hrs" text="Average Review Time" />
-                        <AnimatedStat number={99.9} suffix="%" text="Uptime Guarantee" />
-                        <AnimatedStat number={5} suffix="M+" text="Happy Users" />
-                    </div>
-                </div>
-            </section>
+                {/* Stats Banner */}
+                <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg overflow-hidden mb-12 border border-gray-200 dark:border-gray-700">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-gray-200 dark:divide-gray-700">
+                        <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors">
+                            <div className="flex items-center justify-center mb-3">
+                                <div className="text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 mr-2">
+                                    3
+                                </div>
+                                <div className="flex">
 
-            {/* Main Process Steps Section */}
-            <main id="process" className="max-w-7xl mx-auto px-6 py-24 sm:py-32">
-                <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                        From Submission to Publication
-                    </h2>
-                    <p className="mt-4 text-lg text-slate-600">
-                        Our four-step process is designed to be straightforward for you and rigorous for us, ensuring the highest quality content on our platform.
-                    </p>
-                </div>
+                                </div>
+                            </div>
+                            <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
+                                Menyra Vleresimi                             </p>
+                            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+                                Per me shume saktesi
+                            </p>
+                        </div>
 
-                <div className="relative mt-20">
-                    {/* The timeline line */}
-                    <div className="absolute left-1/2 -ml-px w-0.5 h-full bg-slate-200 hidden lg:block" aria-hidden="true"></div>
+                        <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors">
+                            <div className="text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
+                                3,850+
+                            </div>
+                            <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
+                                Vizitor Ditor                             </p>
+                            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+                                Te cilet hulumtojne
+                            </p>
+                        </div>
 
-                    {processSteps.map((item, index) => (
-                        <div key={item.title} className="relative mb-20 lg:mb-32">
-                            <div className={`flex flex-col lg:flex-row items-center gap-12 ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-                                {/* Content Section */}
-                                <div className="lg:w-1/2">
-                                    <div className="flex items-center gap-4">
-                                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-600/10 text-primary-600 flex items-center justify-center font-bold text-xl border-2 border-primary-600/20">
-                                            {item.step}
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-slate-900">{item.title}</h3>
-                                    </div>
-                                    <p className="mt-6 text-base leading-7 text-slate-600">{item.description}</p>
-                                    <div className="mt-6 bg-primary-50 border-l-4 border-primary-300 p-4 rounded-r-md">
-                                        <p className="text-sm text-primary-900/90">{item.proTip}</p>
-                                    </div>
+                        <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors">
+                            <div className="text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
+                                100%
+                            </div>
+                            <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
+                                Transparente
+                            </p>
+                            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+                                Pa ndikim komercial
+
+                            </p>
+                        </div>
+
+                        <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors">
+                            <div className="flex items-center justify-center space-x-2 mb-3">
+                                <div className="text-4xl font-extrabold text-gray-900 dark:text-white">
+                                    24/7
                                 </div>
 
-                                {/* Image/Mockup Section */}
-                                <div className="lg:w-1/2">
-                                    <div className="bg-white p-2 rounded-xl shadow-2xl shadow-slate-900/10 ring-1 ring-slate-900/5">
-                                        <img
-                                            src={item.imageUrl}
-                                            alt={`Mockup for ${item.title}`}
-                                            className="rounded-lg w-full"
+                            </div>
+                            <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
+                                Asistence
+                            </p>
+                            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+                                Permes Void Ai Chat                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Filter Bar */}
+                <div className="mb-8 flex flex-wrap gap-2">
+                    <button
+                        onClick={() => setActiveFilter("all")}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeFilter === "all" ? "bg-[#00B67A] text-white" : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200"}`}
+                    >
+                        Të gjitha vlerësimet
+                    </button>
+
+
+                </div>
+
+                {/* Reviews Grid */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredReviews.map((review) => (
+                        <div
+                            key={review.id}
+                            className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all overflow-hidden border border-gray-200 dark:border-gray-700 hover:-translate-y-1"
+                        >
+                            <div className="p-5">
+                                <div className="flex justify-between items-start mb-3">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-full bg-[#00B67A]/10 dark:bg-[#00B67A]/20 flex items-center justify-center text-[#00B67A] dark:text-[#00B67A]/80 font-medium">
+                                            {review.name.charAt(0)}
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 dark:text-white">{review.name}</h4>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                                {new Date(review.date).toLocaleDateString('sq-AL', { year: 'numeric', month: 'short', day: 'numeric' })}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {review.verified && (
+                                        <div className="flex items-center text-xs text-[#00B67A] dark:text-[#00B67A]/80">
+                                            <FontAwesomeIcon icon={faCheckCircle} className="mr-1" />
+                                            I verifikuar
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="mb-3">{renderStars(review.rating)}</div>
+
+                                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                                    {review.title}
+                                </h3>
+
+                                <div className="relative mb-3">
+                                    <FontAwesomeIcon
+                                        icon={faQuoteLeft}
+                                        className="absolute -top-1 left-0 text-gray-200 dark:text-gray-700 text-3xl -z-10"
+                                    />
+                                    <p className={`text-gray-600 dark:text-gray-300 relative z-10 ${expandedReview === review.id ? "" : "line-clamp-3"}`}>
+                                        {review.content}
+                                    </p>
+                                </div>
+
+                                <div className="flex justify-between items-center">
+                                    <button
+                                        onClick={() => setExpandedReview(expandedReview === review.id ? null : review.id)}
+                                        className="text-[#00B67A] dark:text-[#00B67A]/80 hover:text-[#009A6B] dark:hover:text-[#00B67A] text-sm font-medium flex items-center"
+                                    >
+                                        {expandedReview === review.id ? "Trego më pak" : "Lexo më shumë"}
+                                        <FontAwesomeIcon
+                                            icon={faChevronDown}
+                                            className={`ml-1 transition-transform ${expandedReview === review.id ? "rotate-180" : ""}`}
                                         />
+                                    </button>
+
+                                    <div className="flex gap-1">
+                                        {review.tags.slice(0, 2).map(tag => (
+                                            <span
+                                                key={tag}
+                                                className="px-2 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 capitalize"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-            </main>
 
-            {/* Guidelines Section */}
-            <section id="guidelines" className="bg-white border-t border-slate-200">
-                <div className="max-w-7xl mx-auto px-6 py-24 sm:py-32">
-                    <div className="text-center max-w-3xl mx-auto">
-                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                            Community Guidelines
-                        </h2>
-                        <p className="mt-4 text-lg text-slate-600">
-                            To maintain a trusted and helpful community, we ask all users to adhere to these simple guidelines when writing reviews.
-                        </p>
-                    </div>
+                {/* CTA Section */}
 
-                    <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
-                        {/* "Do Include" List */}
-                        <div>
-                            <h3 className="text-xl font-semibold flex items-center gap-x-3 text-green-600">
-                                <CheckCircleIcon className="w-7 h-7" />
-                                Do's for a Great Review
-                            </h3>
-                            <ul className="mt-6 space-y-4 text-slate-600">
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Be Specific.</strong> Mention products, services, or people by name to add valuable context.</span></li>
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Be Honest.</strong> Provide a fair and balanced assessment of your genuine experience.</span></li>
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Be Helpful.</strong> Write for other consumers. What would you want to know before making a decision?</span></li>
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Be Current.</strong> Review recent experiences to ensure the information is relevant.</span></li>
-                            </ul>
-                        </div>
 
-                        {/* "Don't Include" List */}
-                        <div>
-                            <h3 className="text-xl font-semibold flex items-center gap-x-3 text-red-600">
-                                <XCircleIcon className="w-7 h-7" />
-                                What to Avoid
-                            </h3>
-                            <ul className="mt-6 space-y-4 text-slate-600">
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Private Information.</strong> Never include phone numbers, addresses, or other personal data.</span></li>
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Inappropriate Content.</strong> No offensive language, hate speech, or discriminatory remarks.</span></li>
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Promotional Content.</strong> Reviews should not be used for advertising or including external links.</span></li>
-                                <li className="flex gap-x-3"><span><strong className="font-semibold text-slate-900">Irrelevant Feedback.</strong> Keep your review focused on the specific experience with the business.</span></li>
-                            </ul>
+                <div className="max-w-[1450px] mx-auto">
+                    <div className="m-4 lg:m-6 p-6 sm:p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg">
+                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 text-center lg:text-left">
+
+                            {/* Text Content Column */}
+                            <div className="lg:max-w-[650px]">
+                                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+                                    Gati të bëhesh pjesë e <span className="text-brand-green">familjes sonë</span> të klientëve?
+                                </h3>
+                                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300">
+                                    Përjeto ndryshimin që mijëra klientë dhe kompani e besojnë.
+                                </p>
+                            </div>
+
+                            {/* Buttons Column */}
+                            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+                                <button className="w-full sm:w-auto px-8 py-3.5 bg-brand-green text-white font-medium rounded-lg shadow-lg hover:shadow-brand-green transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-green">
+                                    Rezervo tani
+                                </button>
+                                <button className="w-full sm:w-auto px-8 py-3.5 border-2 border-gray-300 dark:border-gray-600 hover:border-brand-green dark:hover:border-brand-green text-gray-800 dark:text-white font-medium rounded-lg hover:text-brand-green dark:hover:text-brand-green transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-teal-500/50">
+                                    Na kontakto
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </section>
-
-            {/* CTA Section */}
-            <footer className="bg-slate-900">
-                <div className="max-w-7xl mx-auto px-6 py-24 sm:py-32 text-center">
-                    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                        Ready to Share Your Experience?
-                    </h2>
-                    <p className="mt-4 text-lg text-slate-300 max-w-xl mx-auto">
-                        Your voice matters. Help strengthen our community and empower others by writing a review today.
-                    </p>
-                    <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <a href="#" className="rounded-md bg-primary-600 px-5 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors">
-                            Write a Review
-                        </a>
-                        <a href="#" className="text-base font-semibold leading-6 text-white hover:text-slate-100">
-                            Learn more <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
-                </div>
-            </footer>
-        </div>
+            </div>
+        </section>
     );
-};
-
-export default HowReviewsWorkPage;
+}

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from 'react-helmet';
+
 import {
     faStar as solidStar,
     faStarHalfAlt as halfStar,
@@ -12,7 +14,9 @@ import Banner from "../components/Banner";
 
 function Banner1() {
     return (
-        <div className="bg-gradient-to-r from-[#00B67A]/10 via-[#00B67A]/20 to-[#00B67A]/30 p-4 rounded-xl mb-8 border border-[#00B67A]/20">
+          
+        
+        <div className="bg-gradient-to-r from-[#00B67A]/10 via-[#00B67A]/20 to-[#00B67A]/30 p-4 rounded-xl mb-8 border border-[#00B67A]/20 mt-10 ">
             <p className="text-center text-sm font-medium text-gray-700 dark:text-gray-300">
                 ✨ E besuar nga <span className="font-bold text-[#00B67A] dark:text-[#00B67A]/80">2,450+</span> klientë dhe kompani ✨
             </p>
@@ -60,7 +64,11 @@ export default function PremiumReviewSection() {
         const hasHalfStar = rating % 1 >= 0.5;
 
         return (
-            <div className="flex items-center">
+
+<div className="flex items-center">
+<Helmet>
+        <title>E-Vleresoj - Home</title>
+      </Helmet>
                 {Array(5).fill(0).map((_, i) => {
                     if (i < fullStars) {
                         return <FontAwesomeIcon key={i} icon={solidStar} className="text-yellow-400 mr-0.5" />;
@@ -78,6 +86,7 @@ export default function PremiumReviewSection() {
     };
 
     return (
+        
         <section className="w-full py-16 bg-white dark:bg-gray-900">
             <Banner />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,10 +98,11 @@ export default function PremiumReviewSection() {
                             Vlerësimet e klientëve dhe kompanive
                         </span>
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-                            Të dashura nga <span className="text-[#00B67A] dark:text-[#00B67A]/80">klientët dhe bizneset</span> në mbarë botën
+                            Vleresime te verteta nga
+                            <span className="text-[#00B67A] dark:text-[#00B67A]/80"> klientët per bizneset </span> qe kane pasur experience
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400">
-                            Mos u mbështetni vetëm tek ne. Ja çfarë thotë komuniteti ynë për përvojat e tyre me produktet dhe kompanitë tona.
+                            Mos I besoni marketingut te bizneseve, besoju njerezve qe kane experience me kualitetin, shpejtesine dhe cmimet e ketyre bizneseve.
                         </p>
                     </div>
 
@@ -113,23 +123,16 @@ export default function PremiumReviewSection() {
                         <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors">
                             <div className="flex items-center justify-center mb-3">
                                 <div className="text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 mr-2">
-                                    4.8
+                                    3
                                 </div>
                                 <div className="flex">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg key={i} xmlns="http://www.w3.org/2000/svg"
-                                            className="h-5 w-5 text-amber-400 fill-current"
-                                            viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    ))}
+
                                 </div>
                             </div>
                             <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
-                                Excellence Rated
-                            </p>
+                                Menyra Vleresimi                             </p>
                             <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
-                                Based on 850+ reviews
+                                Per me shume saktesi
                             </p>
                         </div>
 
@@ -138,22 +141,22 @@ export default function PremiumReviewSection() {
                                 3,850+
                             </div>
                             <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
-                                Trusted Clients
-                            </p>
+                                Vizitor Ditor                             </p>
                             <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
-                                Worldwide satisfaction
+                                Te cilet hulumtojne
                             </p>
                         </div>
 
                         <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors">
                             <div className="text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
-                                98%
+                                100%
                             </div>
                             <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
-                                Would Recommend
+                                Transparente
                             </p>
                             <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
-                                Client loyalty rate
+                                Pa ndikim komercial
+
                             </p>
                         </div>
 
@@ -162,16 +165,13 @@ export default function PremiumReviewSection() {
                                 <div className="text-4xl font-extrabold text-gray-900 dark:text-white">
                                     24/7
                                 </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-rose-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+
                             </div>
                             <p className="text-gray-600 dark:text-gray-300 font-medium text-sm uppercase tracking-wider">
-                                Dedicated Support
+                                Asistence
                             </p>
                             <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
-                                Always at your service
-                            </p>
+                                Permes Void Ai Chat                            </p>
                         </div>
                     </div>
                 </div>
@@ -184,19 +184,8 @@ export default function PremiumReviewSection() {
                     >
                         Të gjitha vlerësimet
                     </button>
-                    <button
-                        onClick={() => setActiveFilter("shërbim")}
-                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeFilter === "shërbim" ? "bg-[#00B67A]/10 text-[#00B67A] dark:bg-[#00B67A]/20 dark:text-[#00B67A]/80" : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200"}`}
-                    >
-                        Shërbim
-                    </button>
-                    <button
-                        onClick={() => setActiveFilter("produkt")}
-                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeFilter === "produkt" ? "bg-[#00B67A]/10 text-[#00B67A] dark:bg-[#00B67A]/20 dark:text-[#00B67A]/80" : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200"}`}
-                    >
-                        Produkt
-                    </button>
-                    {/* Add more filters if you want */}
+
+
                 </div>
 
                 {/* Reviews Grid */}

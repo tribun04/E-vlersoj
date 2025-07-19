@@ -7,39 +7,15 @@ import { faUsers, faShieldAlt, faChartLine, faGlobe, faHandshake, } from "@forta
 
 
 const AboutUsPage = () => {
-    const teamMembers = [
-        {
-            name: "Alex Johnson",
-            role: "CEO & Themelues",
-            bio: "Pionier në sistemet e besimit online me 15+ vjet në menaxhimin e reputacionit.",
-            image: "/images/team/alex.jpg"
-        },
-        {
-            name: "Sarah Chen",
-            role: "CTO",
-            bio: "Vizionare teknologjike e specializuar në platforma të shkallëzueshme dhe moderim me AI.",
-            image: "/images/team/sarah.jpg"
-        },
-        {
-            name: "Michael Rodriguez",
-            role: "Drejtor i Produktit",
-            bio: "Lider produkti i fokusuar në krijimin e përvojave intuitive të vlerësimit.",
-            image: "/images/team/michael.jpg"
-        },
-        {
-            name: "Emma Wilson",
-            role: "Drejtoreshë e Besimit & Sigurisë",
-            bio: "Eksperte në sistemet e zbulimit të mashtrimit dhe autenticitetit të vlerësimeve.",
-            image: "/images/team/emma.jpg"
-        }
-    ];
-
+   
     const milestones = [
-        { year: "2015", event: "Kompania u themelua me misionin për të ndërtuar besim online" },
-        { year: "2017", event: "Lansuam platformën e parë për mbledhjen e vlerësimeve" },
-        { year: "2019", event: "Arritëm 1 milion vlerësime mujore" },
-        { year: "2021", event: "Prezantuam zbulimin e mashtrimit me fuqi nga AI" },
-        { year: "2023", event: "U zgjeruam në 50+ vende në mbarë botën" }
+        {
+            year: "2024", event: "Kompania u ideua me mission per te ndertuar besim online "
+        },
+        { year: "2025", event: "Lansuam platformen e pare te vleresimit ne trojet shqip-folese " },
+        { year: "2025", event: "Arritem 10K vizitor ne diten e pare " },
+
+
     ];
 
     const values = [
@@ -53,16 +29,8 @@ const AboutUsPage = () => {
             title: "Komuniteti",
             description: "Ne ndërtojmë mjete që u shërbejnë në mënyrë të drejtë si konsumatorëve ashtu edhe bizneseve."
         },
-        {
-            icon: faChartLine,
-            title: "Inovacioni",
-            description: "Ne evoluojmë vazhdimisht për të qëndruar para mashtrimit dhe për të përmirësuar autenticitetin."
-        },
-        {
-            icon: faGlobe,
-            title: "Perspektiva Globale",
-            description: "Ne u shërbejmë tregjeve të ndryshme me zgjidhje të lokalizuara."
-        },
+
+
         {
             icon: faHandshake,
             title: "Partneriteti",
@@ -78,22 +46,23 @@ const AboutUsPage = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="relative z-10 pb-8 bg-white dark:bg-gray-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                         <div className="pt-10 px-4 sm:px-6 lg:px-8">
-                            <div className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                            <div className="mt-20 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                                 <div className="text-center lg:text-left">
                                     <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-                                        <span className="block">Ndërtimi i besimit përmes</span>
-                                        <span className="block text-[#00B67A]">vlerësimeve transparente</span>
+                                        <span className="block">Ne deshirojme te jemi nje ure
+                                        </span>
+                                        <span className="block text-[#00B67A]">transparente mes klienteve dhe bizneseve</span>
                                     </h1>
                                     <p className="mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                        Ne po revolucionarizojmë mënyrën se si bizneset dhe konsumatorët lidhen përmes feedback-ut autentik.
+                                        Platforma jone po ndryshon formen se si bizneset dhe klientet nderlidhen permes vlersimeve autentike.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                    <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Ekipi duke bashkepunuar" />
+                <div className="lg:absolute  object-cover lg:inset-y-0 lg:right-0 lg:w-1/2">
+                    <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="images/HeroSection-Banner.png" alt="Ekipi duke bashkepunuar" />
                 </div>
             </div>
 
@@ -103,14 +72,14 @@ const AboutUsPage = () => {
                     <div className="lg:text-center">
                         <h2 className="text-base text-[#00B67A] font-semibold tracking-wide uppercase">Historia Jonë</h2>
                         <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                            Nga një startup në lider të industrisë
+                            Ndertimi I nje tregu me transparent
                         </p>
                         <div className="mt-10">
                             <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 items-center">
                                 <div>
                                     <p className="text-lg text-gray-500 dark:text-gray-400 mb-6">
-                                        Të themeluar në 2015, ne u nisëm për të zgjidhur një problem: mungesën e transparencës në vlerësimet online.
-                                        Ajo që filloi si një ekip i vogël idealistësh është rritur në një platformë globale të besuar nga miliona.
+                                        E ideuar ne vitin 2024 me nje iniciative te brendshme ne Shigjeta LLC, si programmer dhe pjsese e ekipit Tribun Bajra zgjedh qe nje problematike si fenomen aktual ta kthej me nje zgjidhje e cila aplikohet lehte dhe pa kosto. 2025 kjo platforme merr formen e duhur dhe konceptin me nje themel shume te fuqishem.
+
                                     </p>
 
                                 </div>
@@ -118,8 +87,7 @@ const AboutUsPage = () => {
                                     <div className="bg-[#00B67A]/10 dark:bg-[#00B67A]/20 p-6 rounded-lg border-l-4 border-[#00B67A]">
                                         <h3 className="text-lg font-medium text-[#008a5c] dark:text-[#00e096] mb-2">Misioni Ynë</h3>
                                         <p className="text-gray-700 dark:text-gray-300">
-                                            Të krijojmë një botë ku njerëzit dhe bizneset lidhen përmes vlerësimeve autentike,
-                                            të besueshme që nxisin vendime dhe përvoja më të mira.
+                                            te krijojme nje treg transparent I cili nuk I demton bizneset e as klientet dhe te jete nje institucion qe fuqizon te dy palet.
                                         </p>
                                     </div>
                                 </div>
@@ -135,7 +103,7 @@ const AboutUsPage = () => {
                     <div className="lg:text-center mb-12">
                         <h2 className="text-base text-[#00B67A] font-semibold tracking-wide uppercase">Arritjet Tona</h2>
                         <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                            Udhëtimi ynë deri më tani
+                            Udhetimi yne deri ne lansim
                         </p>
                     </div>
                     <div className="flow-root">
@@ -175,7 +143,7 @@ const AboutUsPage = () => {
                     <div className="lg:text-center mb-12">
                         <h2 className="text-base text-[#00B67A] font-semibold tracking-wide uppercase">Vlerat Tona</h2>
                         <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                            Çfarë na motivon çdo ditë
+                            Cfare na motivon cdo dite
                         </p>
                     </div>
                     <div className="mt-10">
@@ -201,30 +169,32 @@ const AboutUsPage = () => {
             </div>
 
             {/* Udhëheqësia */}
-       
+
 
             {/* Thirrje për Veprim (CTA) */}
             <div className="bg-[#00B67A]">
                 <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
                     <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                        <span className="block">Gati t'i bashkoheni misionit tonë?</span>
-                        <span className="block text-white text-opacity-90">Ne po punësojmë njerëz të talentuar.</span>
+                        <span className="block">Gati per te ndjek platformat tjera?
+                        </span>
+                        <span className="block text-white text-opacity-90">Ne krijojme benefite per tregun dhe klientet.
+                        </span>
                     </h2>
                     <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
                         <div className="inline-flex rounded-md shadow">
                             <a
-                                href="#"
+                                href="https://e-visiton.com/" target="_blank"
                                 className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-[#00B67A] bg-white hover:bg-gray-50"
                             >
-                                Shiko Pozicionet e Lira
+                                E- Visiton
                             </a>
                         </div>
                         <div className="ml-3 inline-flex rounded-md shadow">
                             <a
-                                href="#"
-                                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-black/20 hover:bg-black/30"
+                                href="https://e-krahasoj.com/" target="_blank"
+                                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-[#00B67A] bg-white hover:bg-gray-50"
                             >
-                                Na Kontaktoni
+                                E- krahasoj
                             </a>
                         </div>
                     </div>

@@ -317,8 +317,8 @@ const PrivacyPolicy = () => (
         <ul className="list-none space-y-1">
           <li>
             <strong>Me email:</strong>{" "}
-            <a href="mailto:privatesia@e-vlersoj.com" className="text-blue-600">
-              privatesia@e-vlersoj.com
+            <a href="mailto:Support@e-vlersoj.com" className="text-blue-600">
+              Support@e-vlersoj.com
             </a>
           </li>
           <li>

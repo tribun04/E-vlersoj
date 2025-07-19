@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import AuthContext from '../context/AuthContext';
 import GoogleLoginButton from '../components/GoogleLoginButton';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Login = () => {
         // You can render a loading state or the error message directly
         return (
             <div className="min-h-screen flex items-center justify-center">
+             
                 <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
                     <p className="font-bold">Configuration Error</p>
                     <p>Could not find Auth Provider. Please check the console.</p>
@@ -58,11 +60,17 @@ const Login = () => {
 
             login(user, token); // Call the context's login function
 
-            if (user.role === 'admin') {
-                navigate('/admin');
+            // --- START: MODIFICATION ---
+            // Check the user's role and redirect to the appropriate page.
+            if (user.role === 'company') {
+                navigate(`/company/${user.id}`); // Redirect company to their profile
+            } else if (user.role === 'admin') {
+                navigate('/admin/dashboard'); // Redirect admin to dashboard
             } else {
-                navigate('/');
+                navigate('/'); // Redirect regular users to the homepage
             }
+            // --- END: MODIFICATION ---
+
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed. Please try again.');
         } finally {
@@ -82,7 +90,17 @@ const Login = () => {
 
             login(user, token); // Use the same central login function
 
-            navigate('/');
+            // --- START: MODIFICATION ---
+            // Apply the same redirection logic here for consistency.
+            if (user.role === 'company') {
+                navigate(`/company/${user.id}`);
+            } else if (user.role === 'admin') {
+                navigate('/admin/dashboard');
+            } else {
+                navigate('/');
+            }
+            // --- END: MODIFICATION ---
+
         } catch (err) {
             console.error("Backend Google Sign-In Error:", err);
             setError(err.response?.data?.message || 'Google Sign-In failed. Please try again.');
@@ -97,6 +115,9 @@ const Login = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+               <Helmet>
+        <title>E-Vleresoj - Login</title>
+      </Helmet>
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
                     Hyr në llogarinë tënde
@@ -176,8 +197,8 @@ const Login = () => {
                         </div>
 
                         <div className="mt-6 flex justify-center">
-                            <GoogleLoginButton />
-
+                            {/* Pass the success handler to your button component */}
+                            <GoogleLoginButton onSuccess={handleGoogleLoginSuccess} onError={handleGoogleError} />
                         </div>
                     </div>
                 </div>
